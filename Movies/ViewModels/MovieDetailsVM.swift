@@ -26,6 +26,13 @@ class MovieDetailsVM {
         }
     }
     
+    func getReviews(CompletionHandler: @escaping(String, Bool) -> ()) {
+        api.callAPI(APItype: .getReviews, urlComponent: "\(selectedMovie!.id)/reviews?", pageCount: 1) { (message, status) in
+            CompletionHandler(message, status)
+            return
+        }
+    }
+    
     
     func numberOfSections(in tableView: DetailsTables) -> Int {
         if tableView == .details {
@@ -36,16 +43,23 @@ class MovieDetailsVM {
     
     func numberOfRows(in tableView: DetailsTables, In section: Int) -> Int {
         if tableView == .details {
-            return 1
+            return 4
         }
         return 0
     }
     
     func heightForRow(in tableView: DetailsTables, at indexPath: IndexPath) -> CGFloat {
         if tableView == .details {
-            return 125.0
+            switch indexPath.row {
+            case 0:
+                return UITableView.automaticDimension
+            case 1:
+                return Movies.movieReviews.reviews?.total_results == 0 ? 0 : 55.0
+            default:
+                return 55.0
+            }
         }
-        return 0
+        return 55.0
     }
     
     func cellData(for tableView: DetailsTables, at indexPath: IndexPath) -> Any? {

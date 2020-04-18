@@ -17,10 +17,11 @@ class API {
     //API end points
     private let getMovieList = "movie/now_playing?"
     private let synopsis = "movie/"
+    private let getReviews = "movie/"
     enum type {
         case getMovieList
         case synopsis
-        
+        case getReviews
     }
 
     func getAPIUrl(APItype: type) -> String {
@@ -33,6 +34,9 @@ class API {
             
         case .synopsis:
             apiUrl.append(synopsis)
+            
+        case .getReviews:
+            apiUrl.append(getReviews)
         }
 
         return apiUrl
@@ -106,6 +110,17 @@ class API {
                         let details = try! JSONDecoder().decode(DetailsModel.self, from: data)
                         Movies.details.movieDetails = details
                         
+                        CompletionHandler("", true)
+                        return
+                    }
+                    CompletionHandler("", false)
+                    return
+                    
+                case .getReviews:
+                    if let json = response.result.value as? [String : AnyObject] {
+                        guard let data = self.jsonToData(json: json) else { return }
+                        let reviewResponse = try! JSONDecoder().decode(ReviewResponseModel.self, from: data)
+                        Movies.movieReviews.reviews = reviewResponse
                         CompletionHandler("", true)
                         return
                     }

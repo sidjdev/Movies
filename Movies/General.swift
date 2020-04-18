@@ -12,6 +12,7 @@ import Foundation
 class Movies {
     static let movieList = MovieListVM()
     static let details = MovieDetailsVM()
+    static let movieReviews = MovieReviewsVM()
 }
 
 class Logger {

@@ -35,16 +35,27 @@ class MovieDetailsView: UIViewController {
         self.navigationItem.title = movieDetailsVM?.selectedMovie?.title
         setBackDropImage()
         let synopsisNib = UINib(nibName: "SynopsisCell", bundle: nil)
+        let reviewsNib = UINib(nibName: "ReviewIndicatorCell", bundle: nil)
         detailsTable.register(synopsisNib, forCellReuseIdentifier: "synopsisCell")
+        detailsTable.register(reviewsNib, forCellReuseIdentifier: "reviewIndicatorCell")
         // Do any additional setup after loading the view.
     }
     
     override func viewDidAppear(_ animated: Bool) {
         getSynopsis()
+        getReviews()
     }
     
     func getSynopsis() {
         movieDetailsVM?.getSynopsis(CompletionHandler: { (message, status) in
+            DispatchQueue.main.async {
+                self.detailsTable.reloadData()
+            }
+        })
+    }
+    
+    func getReviews() {
+        movieDetailsVM?.getReviews(CompletionHandler: { (message, status) in
             DispatchQueue.main.async {
                 self.detailsTable.reloadData()
             }
@@ -91,6 +102,10 @@ extension MovieDetailsView: UITableViewDataSource {
             guard let synopsisCell = tableView.dequeueReusableCell(withIdentifier: "synopsisCell") as? SynopsisCell else { return UITableViewCell() }
             synopsisCell.synopsis = synopsis
             return synopsisCell
+            
+        case 1:
+            guard let reviewCell = tableView.dequeueReusableCell(withIdentifier: "reviewIndicatorCell") as? ReviewIndicatorCell else { return UITableViewCell() }
+            return reviewCell
         default:
             return UITableViewCell()
         }
@@ -99,7 +114,7 @@ extension MovieDetailsView: UITableViewDataSource {
 
 extension MovieDetailsView: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return UITableView.automaticDimension
+        return Movies.details.heightForRow(in: .details, at: indexPath)
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
