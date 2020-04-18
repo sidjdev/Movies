@@ -8,12 +8,13 @@
 
 import Foundation
 import Alamofire
+import AlamofireImage
 
 class API {
 
-    public let baseUrl = "https://api.themoviedb.org/3/"
+    private let baseUrl = "https://api.themoviedb.org/3/"
     
-    static let imageBaseUrl = "https://image.tmdb.org/t/p/"
+    private let imageBaseUrl = "https://image.tmdb.org/t/p/"
 
     //API end points
     private let getMovieList = "movie/now_playing?"
@@ -94,6 +95,27 @@ class API {
             }
         }
     }
+    
+    
+    func getImage(imageName: String, of size: String, CompletionHandler: @escaping (UIImage?) -> ()) {
+        guard let imageURL = URL(string: imageBaseUrl+size+imageName) else { return }
+        Alamofire.request(imageURL).responseImage { response in
+            debugPrint(response)
+
+            print(response.request)
+            print(response.response)
+            debugPrint(response.result)
+
+            if case .success(let image) = response.result {
+                print("image downloaded: \(image)")
+                CompletionHandler(image)
+                return
+            }
+        }
+        
+        CompletionHandler(nil)
+    }
+    
     
     private func getAuthKey() -> String {
         guard let infoPlistDict = Bundle.main.infoDictionary
