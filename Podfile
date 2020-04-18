@@ -7,6 +7,7 @@ target 'Movies' do
 	pod 'Alamofire', '~> 4.9'
   pod 'AlamofireImage'
   pod 'SDWebImage'
+  pod 'Nuke'
 
   # Pods for Movies
 

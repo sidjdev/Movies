@@ -14,7 +14,7 @@ class API {
 
     private let baseUrl = "https://api.themoviedb.org/3/"
     
-    private let imageBaseUrl = "https://image.tmdb.org/t/p/"
+    static let imageBaseUrl = "https://image.tmdb.org/t/p/"
 
     //API end points
     private let getMovieList = "movie/now_playing?"
@@ -98,7 +98,7 @@ class API {
     
     
     func getImage(imageName: String, of size: String, CompletionHandler: @escaping (UIImage?) -> ()) {
-        guard let imageURL = URL(string: imageBaseUrl+size+imageName) else { return }
+        guard let imageURL = URL(string: API.imageBaseUrl+size+imageName) else { return }
         Alamofire.request(imageURL).responseImage { response in
             debugPrint(response)
 
