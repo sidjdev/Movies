@@ -36,8 +36,10 @@ class MovieDetailsView: UIViewController {
         setBackDropImage()
         let synopsisNib = UINib(nibName: "SynopsisCell", bundle: nil)
         let reviewsNib = UINib(nibName: "ReviewIndicatorCell", bundle: nil)
+        let crewsNib = UINib(nibName: "CrewListCell", bundle: nil)
         detailsTable.register(synopsisNib, forCellReuseIdentifier: "synopsisCell")
         detailsTable.register(reviewsNib, forCellReuseIdentifier: "reviewIndicatorCell")
+        detailsTable.register(crewsNib, forCellReuseIdentifier: "crewListCell")
         // Do any additional setup after loading the view.
     }
     
@@ -50,7 +52,7 @@ class MovieDetailsView: UIViewController {
     func getSynopsis() {
         movieDetailsVM?.getSynopsis(CompletionHandler: { (message, status) in
             DispatchQueue.main.async {
-                self.detailsTable.reloadData()
+                self.detailsTable.reloadRows(at: [IndexPath(row: 0, section: 0)], with: .automatic)
             }
         })
     }
@@ -58,7 +60,7 @@ class MovieDetailsView: UIViewController {
     func getReviews() {
         movieDetailsVM?.getReviews(CompletionHandler: { (message, status) in
             DispatchQueue.main.async {
-                self.detailsTable.reloadData()
+                self.detailsTable.reloadRows(at: [IndexPath(row: 1, section: 0)], with: .automatic)
             }
         })
     }
@@ -66,7 +68,7 @@ class MovieDetailsView: UIViewController {
     func getCrew() {
         movieDetailsVM?.getCrew(CompletionHandler: { (message, status) in
             DispatchQueue.main.async {
-                self.detailsTable.reloadData()
+                self.detailsTable.reloadRows(at: [IndexPath(row: 2, section: 0)], with: .automatic)
             }
         })
     }
@@ -115,6 +117,13 @@ extension MovieDetailsView: UITableViewDataSource {
         case 1:
             guard let reviewCell = tableView.dequeueReusableCell(withIdentifier: "reviewIndicatorCell") as? ReviewIndicatorCell else { return UITableViewCell() }
             return reviewCell
+            
+        case 2:
+            guard let crewCell = tableView.dequeueReusableCell(withIdentifier: "crewListCell") as? CrewListCell else { return UITableViewCell() }
+            DispatchQueue.main.async {
+                crewCell.crewCollectionView.reloadData()
+            }
+            return crewCell
         default:
             return UITableViewCell()
         }

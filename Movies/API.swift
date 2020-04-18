@@ -136,6 +136,7 @@ class API {
                     if let json = response.result.value as? [String : AnyObject] {
                         guard let data = self.jsonToData(json: json) else { return }
                         let crewResponse = try! JSONDecoder().decode(CrewModel.self, from: data)
+                        Movies.details.crewList = crewResponse
                         CompletionHandler("", true)
                         return
                     }

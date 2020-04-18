@@ -22,5 +22,5 @@ struct Crew: Codable {
   var id: Int
   var name: String
   var order: Int
-  var profile_path: String
+  var profile_path: String?
 }

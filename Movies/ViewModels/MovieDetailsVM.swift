@@ -14,7 +14,7 @@ class MovieDetailsVM {
     var selectedMovie: MovieModel? = nil
     let api = API()
     var movieDetails: DetailsModel? = nil
-    
+    var crewList: CrewModel? = nil
     enum DetailsTables {
         case details
     }
@@ -62,6 +62,9 @@ class MovieDetailsVM {
                 return UITableView.automaticDimension
             case 1:
                 return Movies.movieReviews.reviews?.total_results == 0 ? 0 : 55.0
+                
+            case 2:
+                return 175.0
             default:
                 return 55.0
             }
