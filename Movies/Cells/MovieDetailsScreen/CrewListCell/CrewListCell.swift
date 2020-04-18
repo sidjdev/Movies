@@ -24,6 +24,7 @@ class CrewListCell: UITableViewCell {
            return _displayContent
         }
     }
+    var delegate: SimilarMovieProtocol? = nil
     override func awakeFromNib() {
         super.awakeFromNib()
         let crewCellNib = UINib(nibName: "CrewCell", bundle: nil)
@@ -69,8 +70,16 @@ extension CrewListCell: UICollectionViewDataSource {
                 crewCell.movieData = Movies.details.similarMovies?.results[indexPath.item]
         
         }
-        
         return crewCell
-        
+    }
+    
+}
+
+extension CrewListCell: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard let cell = collectionView.cellForItem(at: indexPath) as? CrewCell else {return}
+        if self.displayContent == .similarMovies && delegate != nil {
+            delegate!.selectedSimilar(movie: cell.movieData)
+        }
     }
 }

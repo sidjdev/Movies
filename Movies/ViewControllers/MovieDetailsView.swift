@@ -9,6 +9,9 @@
 import UIKit
 import SDWebImage
 
+protocol SimilarMovieProtocol {
+    func selectedSimilar(movie: MovieModel?)
+}
 class MovieDetailsView: UIViewController {
 
     var movieDetailsVM: MovieDetailsVM? = nil
@@ -32,24 +35,31 @@ class MovieDetailsView: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationItem.title = movieDetailsVM?.selectedMovie?.title
-        setBackDropImage()
+        
         let synopsisNib = UINib(nibName: "SynopsisCell", bundle: nil)
         let reviewsNib = UINib(nibName: "ReviewIndicatorCell", bundle: nil)
         let crewsNib = UINib(nibName: "CrewListCell", bundle: nil)
         detailsTable.register(synopsisNib, forCellReuseIdentifier: "synopsisCell")
         detailsTable.register(reviewsNib, forCellReuseIdentifier: "reviewIndicatorCell")
         detailsTable.register(crewsNib, forCellReuseIdentifier: "crewListCell")
+        
         // Do any additional setup after loading the view.
     }
-    
+    override func viewWillAppear(_ animated: Bool) {
+        self.navigationItem.title = movieDetailsVM?.selectedMovie?.title
+        setBackDropImage()
+        setMovieDetails()
+    }
     override func viewDidAppear(_ animated: Bool) {
+        
+    }
+    
+    func setMovieDetails() {
         getSynopsis()
         getReviews()
         getCrew()
         getSimilarMovies()
     }
-    
     func getSynopsis() {
         movieDetailsVM?.getSynopsis(CompletionHandler: { (message, status) in
             DispatchQueue.main.async {
@@ -129,10 +139,12 @@ extension MovieDetailsView: UITableViewDataSource {
         case 2:
             guard let crewCell = tableView.dequeueReusableCell(withIdentifier: "crewListCell") as? CrewListCell else { return UITableViewCell() }
             crewCell.displayContent = .crew
+            crewCell.delegate = nil
             return crewCell
         case 3:
             guard let crewCell = tableView.dequeueReusableCell(withIdentifier: "crewListCell") as? CrewListCell else { return UITableViewCell() }
             crewCell.displayContent = .similarMovies
+            crewCell.delegate = self
             return crewCell
         default:
             return UITableViewCell()
@@ -147,5 +159,17 @@ extension MovieDetailsView: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+    }
+}
+
+extension MovieDetailsView: SimilarMovieProtocol {
+    func selectedSimilar(movie: MovieModel?) {
+//        guard let detailsVC = storyboard?.instantiateViewController(identifier: "") as? MovieDetailsView else { return }
+
+        let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+        let nextViewController = storyBoard.instantiateViewController(withIdentifier: "detailsViewController") as! MovieDetailsView
+        nextViewController.movieDetailsVM = MovieDetailsVM(movie: movie)
+        self.navigationController?.pushViewController(nextViewController, animated: true)
+        
     }
 }

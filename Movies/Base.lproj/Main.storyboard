@@ -46,7 +46,7 @@
         <!--Movie Name-->
         <scene sceneID="Ln2-bT-UAW">
             <objects>
-                <viewController id="9VT-Dc-WEn" customClass="MovieDetailsView" customModule="Movies" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="detailsViewController" id="9VT-Dc-WEn" customClass="MovieDetailsView" customModule="Movies" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="A2K-Eu-ADu">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

@@ -154,7 +154,7 @@ class API {
                         let similar = try! JSONDecoder().decode(SimilarMoviesModel.self, from: data)
 //                            else { return }
                         
-                        if Movies.details.similarMovies == nil {
+                        if Movies.details.similarMovies == nil || pageCount == 1 {
                             Movies.details.similarMovies = SimilarMoviesModel(data: similar.results)
                         } else {
                             Movies.details.similarMovies!.results.append(contentsOf: similar.results)

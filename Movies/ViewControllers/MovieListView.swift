@@ -78,7 +78,7 @@ extension MovieListView: UITableViewDelegate {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let destination = segue.destination as? MovieDetailsView {
-            destination.movieDetailsVM = MovieDetailsVM()
+            destination.movieDetailsVM = MovieDetailsVM(movie: selectedMovie)
             movieListVM.present(controller: .details, with: destination.movieDetailsVM, from: selectedMovie)
         }
         

@@ -16,6 +16,10 @@ class MovieDetailsVM {
     var movieDetails: DetailsModel? = nil
     var crewList: CrewModel? = nil
     var similarMovies: SimilarMoviesModel? = nil
+    
+    init(movie: MovieModel?) {
+        self.selectedMovie = movie
+    }
     enum DetailsTables {
         case details
     }

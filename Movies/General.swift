@@ -11,7 +11,7 @@ import Foundation
 
 class Movies {
     static let movieList = MovieListVM()
-    static let details = MovieDetailsVM()
+    static let details = MovieDetailsVM(movie: nil)
     static let movieReviews = MovieReviewsVM()
 }
 
