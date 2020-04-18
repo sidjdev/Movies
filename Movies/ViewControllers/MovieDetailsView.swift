@@ -27,10 +27,15 @@ class MovieDetailsView: UIViewController {
         .large : "w1280",
         .original : "original"
     ]
+    
+    @IBOutlet weak var detailsTable: UITableView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.title = movieDetailsVM?.selectedMovie?.title
         setBackDropImage()
+        let synopsisNib = UINib(nibName: "SynopsisCell", bundle: nil)
+        detailsTable.register(synopsisNib, forCellReuseIdentifier: "synopsisCell")
         // Do any additional setup after loading the view.
     }
     
@@ -39,7 +44,11 @@ class MovieDetailsView: UIViewController {
     }
     
     func getSynopsis() {
-        movieDetailsVM?.getSynopsis()
+        movieDetailsVM?.getSynopsis(CompletionHandler: { (message, status) in
+            DispatchQueue.main.async {
+                self.detailsTable.reloadData()
+            }
+        })
     }
     func setBackDropImage() {
         let backdropUrl = getImageUrl(imageSize: .medium, imageName: movieDetailsVM?.selectedMovie?.backdrop_path ?? "")
@@ -64,4 +73,36 @@ class MovieDetailsView: UIViewController {
     }
     */
 
+}
+
+extension MovieDetailsView: UITableViewDataSource {
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return Movies.details.numberOfSections(in: .details)
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return Movies.details.numberOfRows(in: .details, In: section)
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        switch indexPath.row {
+        case 0:
+            guard let synopsis = Movies.details.cellData(for: .details, at: indexPath) as? String else { return UITableViewCell() }
+            guard let synopsisCell = tableView.dequeueReusableCell(withIdentifier: "synopsisCell") as? SynopsisCell else { return UITableViewCell() }
+            synopsisCell.synopsis.text = synopsis
+            return synopsisCell
+        default:
+            return UITableViewCell()
+        }
+    }
+}
+
+extension MovieDetailsView: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableView.automaticDimension
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
 }

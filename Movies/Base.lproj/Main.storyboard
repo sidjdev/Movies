@@ -60,6 +60,11 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="lp2-wb-dvk">
                                 <rect key="frame" x="0.0" y="282.5" width="414" height="613.5"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <sections/>
+                                <connections>
+                                    <outlet property="dataSource" destination="9VT-Dc-WEn" id="ZWH-KV-pfc"/>
+                                    <outlet property="delegate" destination="9VT-Dc-WEn" id="j1S-p8-p5J"/>
+                                </connections>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -77,6 +82,7 @@
                     <navigationItem key="navigationItem" title="Movie Name" id="bGb-ib-g9L"/>
                     <connections>
                         <outlet property="backDropImage" destination="933-W8-O29" id="xLE-Fy-XIS"/>
+                        <outlet property="detailsTable" destination="lp2-wb-dvk" id="8Xc-US-yWl"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rA4-Uf-6zX" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

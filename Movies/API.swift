@@ -103,6 +103,8 @@ class API {
                 case .synopsis:
                     if let json = response.result.value as? [String : AnyObject] {
                         guard let data = self.jsonToData(json: json) else { return }
+                        let details = try! JSONDecoder().decode(DetailsModel.self, from: data)
+                        Movies.details.movieDetails = details
                         
                         CompletionHandler("", true)
                         return
