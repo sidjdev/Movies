@@ -18,6 +18,9 @@ class MovieListVM {
     }
     
     
+    enum PresentingControllers {
+        case details
+    }
     func fetchNowShowingList(CompletionHandler: @escaping (String, Bool) -> ()) {
         api.callAPI(APItype: .getMovieList) { (message, status) in
             CompletionHandler(message, status)
@@ -56,5 +59,14 @@ class MovieListVM {
             }
         }
         return nil
+    }
+    
+    func present(controller: PresentingControllers, with object: Any, from sourceObject: Any) {
+        switch controller {
+        case .details:
+            guard var detailObject = object as? MovieDetailsVM else { return }
+            guard let listObject = sourceObject as? MovieModel else { return }
+            detailObject.selectedMovie = listObject
+        }
     }
 }

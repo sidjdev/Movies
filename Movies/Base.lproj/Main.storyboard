@@ -36,11 +36,52 @@
                     <navigationItem key="navigationItem" title="Movies Available" id="1mT-YS-VwO"/>
                     <connections>
                         <outlet property="moviesTableView" destination="nH6-YB-FRw" id="qwr-Op-J52"/>
+                        <segue destination="9VT-Dc-WEn" kind="show" identifier="toMovieDetails" id="C9f-yy-CNV"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1047.8260869565217" y="120.53571428571428"/>
+        </scene>
+        <!--Movie Name-->
+        <scene sceneID="Ln2-bT-UAW">
+            <objects>
+                <viewController id="9VT-Dc-WEn" customClass="MovieDetailsView" customModule="Movies" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="A2K-Eu-ADu">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="933-W8-O29">
+                                <rect key="frame" x="0.0" y="88" width="414" height="186.5"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="933-W8-O29" secondAttribute="height" multiplier="400:180" id="jZ3-s2-icw"/>
+                                </constraints>
+                            </imageView>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="lp2-wb-dvk">
+                                <rect key="frame" x="0.0" y="282.5" width="414" height="613.5"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="lp2-wb-dvk" firstAttribute="top" secondItem="933-W8-O29" secondAttribute="bottom" constant="8" id="3WF-0Q-c5M"/>
+                            <constraint firstItem="933-W8-O29" firstAttribute="top" secondItem="8AJ-S7-7WO" secondAttribute="top" id="C5g-UK-pMF"/>
+                            <constraint firstItem="933-W8-O29" firstAttribute="leading" secondItem="8AJ-S7-7WO" secondAttribute="leading" id="I0d-1P-dfD"/>
+                            <constraint firstAttribute="bottom" secondItem="lp2-wb-dvk" secondAttribute="bottom" id="RoQ-PF-ZxA"/>
+                            <constraint firstItem="933-W8-O29" firstAttribute="trailing" secondItem="8AJ-S7-7WO" secondAttribute="trailing" id="bph-an-gS8"/>
+                            <constraint firstItem="lp2-wb-dvk" firstAttribute="leading" secondItem="8AJ-S7-7WO" secondAttribute="leading" id="jyc-tv-fMB"/>
+                            <constraint firstItem="lp2-wb-dvk" firstAttribute="trailing" secondItem="8AJ-S7-7WO" secondAttribute="trailing" id="nPO-Ty-zxG"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="8AJ-S7-7WO"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Movie Name" id="bGb-ib-g9L"/>
+                    <connections>
+                        <outlet property="backDropImage" destination="933-W8-O29" id="xLE-Fy-XIS"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="rA4-Uf-6zX" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1992.753623188406" y="120.53571428571428"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="mDC-hj-Vxe">

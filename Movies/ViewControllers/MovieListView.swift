@@ -12,6 +12,7 @@ class MovieListView: UIViewController {
 
     @IBOutlet weak var moviesTableView: UITableView!
     let movieListVM = MovieListVM()
+    var selectedMovie: MovieModel? = nil
     override func viewDidLoad() {
         super.viewDidLoad()
         getNowShowingList()
@@ -58,8 +59,24 @@ extension MovieListView: UITableViewDataSource {
 }
 
 extension MovieListView: UITableViewDelegate {
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return movieListVM.heightForRow(in: .nowShowing, at: indexPath)
+    func tableView(_ tableView: UITableView, automaticDimension: Bool = false, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return automaticDimension ? UITableView.automaticDimension : movieListVM.heightForRow(in: .nowShowing, at: indexPath)
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        if let selectedCell = tableView.cellForRow(at: indexPath) as? MovieListingCell {
+            selectedMovie = selectedCell.cellData
+        }
+        performSegue(withIdentifier: Constants.segue.home_details, sender: self)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let destination = segue.destination as? MovieDetailsView {
+            destination.movieDetailsVM = MovieDetailsVM()
+            movieListVM.present(controller: .details, with: destination.movieDetailsVM, from: selectedMovie)
+        }
+        
     }
 }
 

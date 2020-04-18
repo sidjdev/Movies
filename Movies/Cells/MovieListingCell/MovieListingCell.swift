@@ -50,33 +50,23 @@ class MovieListingCell: UITableViewCell {
     
     func setContents() {
         if cellData != nil {
-            movieName.text = cellData!.title
+            movieName.text = cellData!.original_title
             releaseDate.text = cellData!.release_date
             imageView?.clipsToBounds = true
             imageView?.layer.masksToBounds = true
-            let imageName = cellData!.poster_path.replacingOccurrences(of: "*/", with: "")
-//            let imageBaseUrl = "https://image.tmdb.org/t/p/"
-//            let urlString = imageBaseUrl+posterSizes[.small]!+imageName
-//            guard let imageURL = URL(string: urlString) else { return }
-//            Nuke.loadImage(with: imageURL, into: moviePoster)
             guard let imageURL = getImageUrl(for: cellData!, at: .small) else { return }
             moviePoster.sd_setImage(with: imageURL, completed: nil)
+            DispatchQueue.main.async {
+                self.moviePoster.layer.cornerRadius = 10.0
+            }
             
-//            let api = API()
-//            api.getImage(imageName: imageName, of: posterSizes[.small]!) { (posterImage) in
-//                if posterImage != nil {
-//                    Logger.print("HERE")
-//                }
-//                self.moviePoster?.image = posterImage
-//            }
-            imageView?.layer.cornerRadius = 10.0
             
         }
     }
     
     
     private func getImageUrl(for cellData: MovieModel, at size: imageSizeReference) -> URL? {
-        var imageUrl = API.imageBaseUrl
+        var imageUrl = Constants.URL.imageBaseUrl
         imageUrl = imageUrl+posterSizes[size]!+cellData.poster_path
         if let url = URL(string: imageUrl) {
             return url

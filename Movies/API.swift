@@ -12,9 +12,7 @@ import AlamofireImage
 
 class API {
 
-    private let baseUrl = "https://api.themoviedb.org/3/"
     
-    static let imageBaseUrl = "https://image.tmdb.org/t/p/"
 
     //API end points
     private let getMovieList = "movie/now_playing?"
@@ -24,7 +22,7 @@ class API {
     }
 
     func getAPIUrl(APItype: type) -> String {
-        var apiUrl = baseUrl
+        var apiUrl = Constants.URL.baseUrl
 
         switch APItype {
             
@@ -98,7 +96,7 @@ class API {
     
     
     func getImage(imageName: String, of size: String, CompletionHandler: @escaping (UIImage?) -> ()) {
-        guard let imageURL = URL(string: API.imageBaseUrl+size+imageName) else { return }
+        guard let imageURL = URL(string: Constants.URL.imageBaseUrl+size+imageName) else { return }
         Alamofire.request(imageURL).responseImage { response in
             debugPrint(response)
 
