@@ -15,13 +15,20 @@ class MovieListView: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         getNowShowingList()
+        navigationController?.navigationBar.prefersLargeTitles = true
+        navigationController?.navigationItem.largeTitleDisplayMode = .never
+        let movieListingCellNib = UINib(nibName: "MovieListingCell", bundle: nil)
+        moviesTableView.register(movieListingCellNib, forCellReuseIdentifier: "movieListingCell")
+        moviesTableView.separatorStyle = .none
         // Do any additional setup after loading the view.
     }
     
     func getNowShowingList() {
         movieListVM.fetchNowShowingList { (message, status) in
             if status {
-                self.moviesTableView.reloadData()
+                DispatchQueue.main.async {
+                    self.moviesTableView.reloadData()
+                }
             }
         }
     }
@@ -30,15 +37,29 @@ class MovieListView: UIViewController {
 
 extension MovieListView: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 0
+        return movieListVM.numberOfSections(in: .nowShowing)
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 0
+        return movieListVM.numberOfRows(in: .nowShowing, In: section)
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        return UITableViewCell()
+        guard let cellData = movieListVM.cellData(for: .nowShowing, at: indexPath) as? MovieModel else {return UITableViewCell()}
+        guard let movieCell = tableView.dequeueReusableCell(withIdentifier: "movieListingCell") as? MovieListingCell else { return UITableViewCell() }
+        movieCell.contentView.layer.borderColor = UIColor.lightGray.cgColor
+        movieCell.contentView.layer.borderWidth = 0.5
+        movieCell.contentView.layer.cornerRadius = 10.0
+        movieCell.bookButton.layer.cornerRadius = 10.0
+        movieCell.cellData = cellData
+        
+        return movieCell
+    }
+}
+
+extension MovieListView: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return movieListVM.heightForRow(in: .nowShowing, at: indexPath)
     }
 }
 

@@ -10,6 +10,24 @@ import UIKit
 
 class MovieListingCell: UITableViewCell {
 
+    @IBOutlet weak var moviePoster: UIImageView!
+    
+    @IBOutlet weak var movieName: UILabel!
+    
+    @IBOutlet weak var releaseDate: UILabel!
+    
+    @IBOutlet weak var bookButton: UIButton!
+    
+    private var _cellData: MovieModel? = nil
+    var cellData: MovieModel? {
+        get {
+            return _cellData
+        }
+        set {
+            _cellData = newValue
+            setContents()
+        }
+    }
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -19,6 +37,14 @@ class MovieListingCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
+    }
+    
+    func setContents() {
+        if cellData != nil {
+            movieName.text = cellData!.title
+            releaseDate.text = cellData!.release_date
+        }
+        
     }
     
 }
