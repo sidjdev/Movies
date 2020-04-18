@@ -13,7 +13,7 @@ class API {
 
     public let baseUrl = "https://api.themoviedb.org/3/"
     
-    
+    static let imageBaseUrl = "https://image.tmdb.org/t/p/"
 
     //API end points
     private let getMovieList = "movie/now_playing?"
@@ -95,7 +95,7 @@ class API {
         }
     }
     
-    func getAuthKey() -> String {
+    private func getAuthKey() -> String {
         guard let infoPlistDict = Bundle.main.infoDictionary
         else {
             return ""
@@ -106,7 +106,7 @@ class API {
         return ""
     }
     
-    func jsonToData(json: Any) -> Data? {
+    private func jsonToData(json: Any) -> Data? {
         do {
             return try JSONSerialization.data(withJSONObject: json, options: JSONSerialization.WritingOptions.prettyPrinted)
         } catch let myJSONError {
