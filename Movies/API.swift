@@ -16,8 +16,10 @@ class API {
 
     //API end points
     private let getMovieList = "movie/now_playing?"
+    private let synopsis = "movie/"
     enum type {
         case getMovieList
+        case synopsis
         
     }
 
@@ -29,6 +31,8 @@ class API {
         case .getMovieList:
             apiUrl.append(getMovieList)
             
+        case .synopsis:
+            apiUrl.append(synopsis)
         }
 
         return apiUrl
@@ -49,7 +53,7 @@ class API {
     }
     
     
-    func callAPI(params: Parameters = [:], APItype: type, APIMethod: HTTPMethod = .get, withUrlEncoding: Bool = false, shouldPresentPendingScreen: Bool = true, CompletionHandler: @escaping (String, Bool) -> ()) {
+    func callAPI(params: Parameters = [:], APItype: type, urlComponent: String = "", pageCount: Int = 0, APIMethod: HTTPMethod = .get, withUrlEncoding: Bool = false, shouldPresentPendingScreen: Bool = true, CompletionHandler: @escaping (String, Bool) -> ()) {
         var apiParameters: Parameters? = params
 
         if APIMethod == .get {
@@ -57,8 +61,9 @@ class API {
         }
 
         var apiUrl = getAPIUrl(APItype: APItype)
-
-        apiUrl.append("api_key=\(String(describing: getAuthKey()))&page=1")
+        apiUrl.append(urlComponent)
+        apiUrl.append("api_key=\(String(describing: getAuthKey()))")
+        apiUrl.append(pageCount == 0 ? "" : "&page=\(pageCount)")
         
         
         let headers: HTTPHeaders = [
@@ -81,7 +86,24 @@ class API {
                 case .getMovieList:
                     if let json = response.result.value as? [String : AnyObject] {
                         guard let data = self.jsonToData(json: json) else { return }
-                        Movies.movieList.nowShowing = try! JSONDecoder().decode(NowShowingModel.self, from: data)
+                        guard let nowShowing = try? JSONDecoder().decode(NowShowingModel.self, from: data) else { return }
+                        
+                        if Movies.movieList.nowShowing == nil {
+                            Movies.movieList.nowShowing = NowShowingModel(data: nowShowing.results)
+                        } else {
+                            Movies.movieList.nowShowing!.results.append(contentsOf: nowShowing.results)
+                        }
+                        
+                        CompletionHandler("", true)
+                        return
+                    }
+                    CompletionHandler("", false)
+                    return
+                    
+                case .synopsis:
+                    if let json = response.result.value as? [String : AnyObject] {
+                        guard let data = self.jsonToData(json: json) else { return }
+                        
                         CompletionHandler("", true)
                         return
                     }
@@ -98,14 +120,9 @@ class API {
     func getImage(imageName: String, of size: String, CompletionHandler: @escaping (UIImage?) -> ()) {
         guard let imageURL = URL(string: Constants.URL.imageBaseUrl+size+imageName) else { return }
         Alamofire.request(imageURL).responseImage { response in
-            debugPrint(response)
-
-            print(response.request)
-            print(response.response)
-            debugPrint(response.result)
-
+            
             if case .success(let image) = response.result {
-                print("image downloaded: \(image)")
+                
                 CompletionHandler(image)
                 return
             }

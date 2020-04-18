@@ -29,4 +29,8 @@ struct MovieModel: Codable {
 
 struct NowShowingModel: Codable {
     var results: [MovieModel]
+    
+    init(data: [MovieModel]) {
+        self.results = data
+    }
 }

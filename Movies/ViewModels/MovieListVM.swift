@@ -21,8 +21,8 @@ class MovieListVM {
     enum PresentingControllers {
         case details
     }
-    func fetchNowShowingList(CompletionHandler: @escaping (String, Bool) -> ()) {
-        api.callAPI(APItype: .getMovieList) { (message, status) in
+    func fetchNowShowingList(for page: Int = 1, CompletionHandler: @escaping (String, Bool) -> ()) {
+        api.callAPI(APItype: .getMovieList, pageCount: page) { (message, status) in
             CompletionHandler(message, status)
             return
         }

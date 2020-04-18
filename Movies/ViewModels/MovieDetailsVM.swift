@@ -11,5 +11,12 @@ import Foundation
 
 class MovieDetailsVM {
     var selectedMovie: MovieModel? = nil
+    let api = API()
     
+    
+    func getSynopsis() {
+        api.callAPI(APItype: .synopsis, urlComponent: "\(selectedMovie!.id)?") { (message, status) in
+            
+        }
+    }
 }

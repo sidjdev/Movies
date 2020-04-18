@@ -13,6 +13,7 @@ class MovieListView: UIViewController {
     @IBOutlet weak var moviesTableView: UITableView!
     let movieListVM = MovieListVM()
     var selectedMovie: MovieModel? = nil
+    var page = 1
     override func viewDidLoad() {
         super.viewDidLoad()
         getNowShowingList()
@@ -24,8 +25,8 @@ class MovieListView: UIViewController {
         // Do any additional setup after loading the view.
     }
     
-    func getNowShowingList() {
-        movieListVM.fetchNowShowingList { (message, status) in
+    func getNowShowingList(page: Int = 1) {
+        movieListVM.fetchNowShowingList(for: page) { (message, status) in
             if status {
                 DispatchQueue.main.async {
                     self.moviesTableView.reloadData()
@@ -53,6 +54,10 @@ extension MovieListView: UITableViewDataSource {
         movieCell.contentView.layer.cornerRadius = 10.0
         movieCell.bookButton.layer.cornerRadius = 10.0
         movieCell.cellData = cellData
+        if indexPath.section == tableView.numberOfSections - 1 {
+            page += 1
+            getNowShowingList(page: page)
+        }
         
         return movieCell
     }

@@ -131,7 +131,7 @@
 		B12BDDE2244AB68400705E74 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
-				B12BDDE3244AB68D00705E74 /* MovieListingCell */,
+				B12BDDF6244B592500705E74 /* MovieListingScreen */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -160,6 +160,14 @@
 				B12BDDED244ADAF400705E74 /* MovieModel.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		B12BDDF6244B592500705E74 /* MovieListingScreen */ = {
+			isa = PBXGroup;
+			children = (
+				B12BDDE3244AB68D00705E74 /* MovieListingCell */,
+			);
+			path = MovieListingScreen;
 			sourceTree = "<group>";
 		};
 		B196A489244A165F00D3D2E0 = {

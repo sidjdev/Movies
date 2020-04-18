@@ -35,9 +35,12 @@ class MovieDetailsView: UIViewController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        
+        getSynopsis()
     }
     
+    func getSynopsis() {
+        movieDetailsVM?.getSynopsis()
+    }
     func setBackDropImage() {
         let backdropUrl = getImageUrl(imageSize: .medium, imageName: movieDetailsVM?.selectedMovie?.backdrop_path ?? "")
         backDropImage.sd_setImage(with: backdropUrl, completed: nil)
