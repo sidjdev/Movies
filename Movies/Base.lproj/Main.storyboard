@@ -29,7 +29,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Movies Available" largeTitleDisplayMode="always" id="1mT-YS-VwO"/>
+                    <navigationItem key="navigationItem" title="Movies Available" id="1mT-YS-VwO"/>
                     <connections>
                         <outlet property="moviesTableView" destination="nH6-YB-FRw" id="qwr-Op-J52"/>
                     </connections>

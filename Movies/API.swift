@@ -40,7 +40,7 @@ class API {
     
     
 
-    func alamofireCall(url: String, params: Parameters?, headers: HTTPHeaders, APIMethod: HTTPMethod, urlEncoding: Bool, CompletionHandler: @escaping ((DataResponse<Any>), Bool) -> ()) {
+    private func alamofireCall(url: String, params: Parameters?, headers: HTTPHeaders, APIMethod: HTTPMethod, urlEncoding: Bool, CompletionHandler: @escaping ((DataResponse<Any>), Bool) -> ()) {
         Alamofire.request(url, method: APIMethod, parameters: params, headers: headers).responseJSON
         { response in
             
@@ -50,7 +50,7 @@ class API {
     }
     
     
-    func callAPI(params: Parameters, APItype: type, APIMethod: HTTPMethod, withUrlEncoding: Bool = false, shouldPresentPendingScreen: Bool = true, CompletionHandler: @escaping (String, Bool) -> ()) {
+    func callAPI(params: Parameters = [:], APItype: type, APIMethod: HTTPMethod = .get, withUrlEncoding: Bool = false, shouldPresentPendingScreen: Bool = true, CompletionHandler: @escaping (String, Bool) -> ()) {
         var apiParameters: Parameters? = params
 
         if APIMethod == .get {
@@ -77,7 +77,19 @@ class API {
             //IF DATA IS AVAILABLE
 
             switch response.result {
-            default:
+            case .success:
+                switch APItype {
+                case .getMovieList:
+                    if let json = response.result.value as? [String : AnyObject] {
+                        guard let data = self.jsonToData(json: json) else { return }
+                        Movies.movieList.nowShowing = try! JSONDecoder().decode(NowShowingModel.self, from: data)
+                        CompletionHandler("", true)
+                        return
+                    }
+                    CompletionHandler("", false)
+                    return
+                }
+            case .failure:
                 Logger.print(response.result)
             }
         }
@@ -92,5 +104,14 @@ class API {
              return movieDB["auth_key"] ?? ""
         }
         return ""
+    }
+    
+    func jsonToData(json: Any) -> Data? {
+        do {
+            return try JSONSerialization.data(withJSONObject: json, options: JSONSerialization.WritingOptions.prettyPrinted)
+        } catch let myJSONError {
+            print(myJSONError)
+        }
+        return nil;
     }
 }

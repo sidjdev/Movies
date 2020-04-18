@@ -9,12 +9,16 @@
 import Foundation
 
 
+class Movies {
+    static let movieList = MovieListVM()
+}
+
 class Logger {
     static func print(_ items: Any...) {
         let separator = " "
         let terminator = "\n"
         var output = items.map { "*\($0)" }.joined(separator: separator)
-        #if DEBUG || true
+        #if DEBUG
             output = items.map { "*\($0)" }.joined(separator: separator)
         #else
             output = " "
