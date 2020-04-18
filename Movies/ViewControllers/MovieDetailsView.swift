@@ -89,7 +89,7 @@ extension MovieDetailsView: UITableViewDataSource {
         case 0:
             guard let synopsis = Movies.details.cellData(for: .details, at: indexPath) as? String else { return UITableViewCell() }
             guard let synopsisCell = tableView.dequeueReusableCell(withIdentifier: "synopsisCell") as? SynopsisCell else { return UITableViewCell() }
-            synopsisCell.synopsis.text = synopsis
+            synopsisCell.synopsis = synopsis
             return synopsisCell
         default:
             return UITableViewCell()

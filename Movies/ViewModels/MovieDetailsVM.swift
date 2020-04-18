@@ -28,32 +28,37 @@ class MovieDetailsVM {
     
     
     func numberOfSections(in tableView: DetailsTables) -> Int {
-        switch tableView {
-        case .details:
+        if tableView == .details {
             return 1
         }
+        return 0
     }
     
     func numberOfRows(in tableView: DetailsTables, In section: Int) -> Int {
-        switch tableView {
-        case .details:
+        if tableView == .details {
             return 1
         }
+        return 0
     }
     
     func heightForRow(in tableView: DetailsTables, at indexPath: IndexPath) -> CGFloat {
-        switch tableView {
-        case .details:
+        if tableView == .details {
             return 125.0
         }
+        return 0
     }
     
     func cellData(for tableView: DetailsTables, at indexPath: IndexPath) -> Any? {
-        switch tableView {
-        case .details:
-            if let resultData = Movies.details.movieDetails?.overview {
-                return resultData
+        if tableView == .details {
+            switch indexPath.row {
+            case 0:
+                if let resultData = Movies.details.movieDetails?.overview {
+                    return resultData
+                }
+            default:
+                return nil
             }
+            
         }
         return nil
     }
