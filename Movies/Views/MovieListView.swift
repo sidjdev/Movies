@@ -13,6 +13,9 @@ class MovieListView: UIViewController {
     @IBOutlet weak var moviesTableView: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
+        API().callAPI(params: [:], APItype: .getMovieList, APIMethod: .get) { (message, status) in
+            
+        }
         // Do any additional setup after loading the view.
     }
 

@@ -18,6 +18,11 @@
 	<string>1.0</string>
 	<key>CFBundleVersion</key>
 	<string>1</string>
+	<key>movieDB</key>
+	<dict>
+		<key>auth_key</key>
+		<string>045d4227e2c9f4ffb61c5b81ec3a4197</string>
+	</dict>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>UIApplicationSceneManifest</key>
