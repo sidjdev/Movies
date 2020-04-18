@@ -33,6 +33,13 @@ class MovieDetailsVM {
         }
     }
     
+    func getCrew(CompletionHandler: @escaping(String, Bool) -> ()) {
+        api.callAPI(APItype: .getCrew, urlComponent: "\(selectedMovie!.id)/credits?") { (message, status) in
+            CompletionHandler(message, status)
+            return
+        }
+    }
+    
     
     func numberOfSections(in tableView: DetailsTables) -> Int {
         if tableView == .details {

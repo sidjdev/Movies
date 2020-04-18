@@ -44,6 +44,7 @@ class MovieDetailsView: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         getSynopsis()
         getReviews()
+        getCrew()
     }
     
     func getSynopsis() {
@@ -56,6 +57,14 @@ class MovieDetailsView: UIViewController {
     
     func getReviews() {
         movieDetailsVM?.getReviews(CompletionHandler: { (message, status) in
+            DispatchQueue.main.async {
+                self.detailsTable.reloadData()
+            }
+        })
+    }
+    
+    func getCrew() {
+        movieDetailsVM?.getCrew(CompletionHandler: { (message, status) in
             DispatchQueue.main.async {
                 self.detailsTable.reloadData()
             }
