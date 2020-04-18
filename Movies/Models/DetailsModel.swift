@@ -17,7 +17,7 @@ struct DetailsModel: Codable {
     var original_title: String
     var overview: String
     var adult: Bool
-    var backdrop_path: String
+    var backdrop_path: String?
     var genres: [Genre]
     var homepage: String
     var original_language: String

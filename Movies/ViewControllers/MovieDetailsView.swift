@@ -54,6 +54,12 @@ class MovieDetailsView: UIViewController {
         
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        if self.isMovingFromParent {
+            movieDetailsVM = nil
+        }
+    }
+    
     func setMovieDetails() {
         getSynopsis()
         getReviews()
