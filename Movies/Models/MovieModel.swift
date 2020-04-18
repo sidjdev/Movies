@@ -17,9 +17,9 @@ struct MovieModel: Codable {
     var popularity: Float
     var vote_count: Int
     var video: Bool
-    var poster_path: String
+    var poster_path: String?
     var adult: Bool
-    var backdrop_path: String
+    var backdrop_path: String?
     var original_language: String
     var original_title: String
     var genre_ids: [Int]
@@ -30,6 +30,14 @@ struct MovieModel: Codable {
 struct NowShowingModel: Codable {
     var results: [MovieModel]
     
+    init(data: [MovieModel]) {
+        self.results = data
+    }
+}
+
+
+struct SimilarMoviesModel: Codable {
+    var results: [MovieModel]
     init(data: [MovieModel]) {
         self.results = data
     }

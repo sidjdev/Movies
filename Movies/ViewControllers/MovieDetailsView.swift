@@ -47,6 +47,7 @@ class MovieDetailsView: UIViewController {
         getSynopsis()
         getReviews()
         getCrew()
+        getSimilarMovies()
     }
     
     func getSynopsis() {
@@ -69,6 +70,13 @@ class MovieDetailsView: UIViewController {
         movieDetailsVM?.getCrew(CompletionHandler: { (message, status) in
             DispatchQueue.main.async {
                 self.detailsTable.reloadRows(at: [IndexPath(row: 2, section: 0)], with: .automatic)
+            }
+        })
+    }
+    func getSimilarMovies(pageCount: Int = 1) {
+        movieDetailsVM?.getSimilarMovies(CompletionHandler: { (message, status) in
+            DispatchQueue.main.async {
+                self.detailsTable.reloadRows(at: [IndexPath(row: 3, section: 0)], with: .automatic)
             }
         })
     }
@@ -120,9 +128,11 @@ extension MovieDetailsView: UITableViewDataSource {
             
         case 2:
             guard let crewCell = tableView.dequeueReusableCell(withIdentifier: "crewListCell") as? CrewListCell else { return UITableViewCell() }
-            DispatchQueue.main.async {
-                crewCell.crewCollectionView.reloadData()
-            }
+            crewCell.displayContent = .crew
+            return crewCell
+        case 3:
+            guard let crewCell = tableView.dequeueReusableCell(withIdentifier: "crewListCell") as? CrewListCell else { return UITableViewCell() }
+            crewCell.displayContent = .similarMovies
             return crewCell
         default:
             return UITableViewCell()

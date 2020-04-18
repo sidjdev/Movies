@@ -15,6 +15,7 @@ class MovieDetailsVM {
     let api = API()
     var movieDetails: DetailsModel? = nil
     var crewList: CrewModel? = nil
+    var similarMovies: SimilarMoviesModel? = nil
     enum DetailsTables {
         case details
     }
@@ -35,6 +36,13 @@ class MovieDetailsVM {
     
     func getCrew(CompletionHandler: @escaping(String, Bool) -> ()) {
         api.callAPI(APItype: .getCrew, urlComponent: "\(selectedMovie!.id)/credits?") { (message, status) in
+            CompletionHandler(message, status)
+            return
+        }
+    }
+    
+    func getSimilarMovies(pageCount: Int = 1, CompletionHandler: @escaping(String, Bool) -> ()) {
+        api.callAPI(APItype: .getSimilar, urlComponent: "\(selectedMovie!.id)/similar?", pageCount: pageCount) { (message, status) in
             CompletionHandler(message, status)
             return
         }
@@ -64,6 +72,8 @@ class MovieDetailsVM {
                 return Movies.movieReviews.reviews?.total_results == 0 ? 0 : 55.0
                 
             case 2:
+                return 175.0
+            case 3:
                 return 175.0
             default:
                 return 55.0

@@ -24,18 +24,38 @@ class CrewCell: UICollectionViewCell {
             setDisplay()
         }
     }
+    
+    private var _movieData: MovieModel? = nil
+    var movieData: MovieModel? {
+        get {
+            return _movieData
+        }
+        set {
+            _movieData = newValue
+            setSimilarMovie()
+        }
+    }
     enum imageSizeReference {
         case small
         case medium
         case large
         case original
     }
+    
     let profile_sizes:[imageSizeReference : String] = [
         .small : "w45",
         .medium : "w185",
         .large : "h632",
         .original : "original"
     ]
+    
+    enum posterImageSizeReference {
+        case small
+        case medium
+        case large
+        case original
+    }
+    let posterSizes: [posterImageSizeReference : String] = [.small : "w92", .medium : "w342", .large : "w500", .original : "original"]
     
     
     override func awakeFromNib() {
@@ -50,9 +70,22 @@ class CrewCell: UICollectionViewCell {
         cellImage.makeCircular()
     }
 
+    private func setSimilarMovie() {
+        crewName.text = movieData!.title
+        guard let imageUrl = getPosterImageUrl(imageSize: .medium, imageName: movieData!.poster_path ?? "") else { return }
+        cellImage.sd_setImage(with: imageUrl, completed: nil)
+        cellImage.makeCircular()
+    }
     func getImageUrl(imageSize: imageSizeReference, imageName: String) -> URL? {
         var imageUrlString = Constants.URL.imageBaseUrl
         imageUrlString = imageUrlString+profile_sizes[imageSize]!+imageName
+        guard let imageUrl = URL(string: imageUrlString) else { return nil }
+        return imageUrl
+    }
+    
+    func getPosterImageUrl(imageSize: posterImageSizeReference, imageName: String) -> URL? {
+        var imageUrlString = Constants.URL.imageBaseUrl
+        imageUrlString = imageUrlString+posterSizes[imageSize]!+imageName
         guard let imageUrl = URL(string: imageUrlString) else { return nil }
         return imageUrl
     }

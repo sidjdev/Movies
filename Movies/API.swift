@@ -19,11 +19,13 @@ class API {
     private let synopsis = "movie/"
     private let getReviews = "movie/"
     private let getCrew = "movie/"
+    private let getSimilar = "movie/"
     enum type {
         case getMovieList
         case synopsis
         case getReviews
         case getCrew
+        case getSimilar
     }
 
     func getAPIUrl(APItype: type) -> String {
@@ -42,6 +44,9 @@ class API {
             
         case .getCrew:
             apiUrl.append(getCrew)
+            
+        case .getSimilar:
+            apiUrl.append(getSimilar)
         }
 
         return apiUrl
@@ -137,6 +142,24 @@ class API {
                         guard let data = self.jsonToData(json: json) else { return }
                         let crewResponse = try! JSONDecoder().decode(CrewModel.self, from: data)
                         Movies.details.crewList = crewResponse
+                        CompletionHandler("", true)
+                        return
+                    }
+                    CompletionHandler("", false)
+                    return
+                    
+                case .getSimilar:
+                    if let json = response.result.value as? [String : AnyObject] {
+                        guard let data = self.jsonToData(json: json) else { return }
+                        let similar = try! JSONDecoder().decode(SimilarMoviesModel.self, from: data)
+//                            else { return }
+                        
+                        if Movies.details.similarMovies == nil {
+                            Movies.details.similarMovies = SimilarMoviesModel(data: similar.results)
+                        } else {
+                            Movies.details.similarMovies!.results.append(contentsOf: similar.results)
+                        }
+                        
                         CompletionHandler("", true)
                         return
                     }

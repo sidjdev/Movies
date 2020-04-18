@@ -67,7 +67,7 @@ class MovieListingCell: UITableViewCell {
     
     private func getImageUrl(for cellData: MovieModel, at size: imageSizeReference) -> URL? {
         var imageUrl = Constants.URL.imageBaseUrl
-        imageUrl = imageUrl+posterSizes[size]!+cellData.poster_path
+        imageUrl = imageUrl+posterSizes[size]!+(cellData.poster_path ?? "")
         if let url = URL(string: imageUrl) {
             return url
         }
