@@ -19,6 +19,7 @@ class ReviewsView: UIViewController {
         resultsTable.register(reviewCellNib, forCellReuseIdentifier: "reviewCell")
         resultsTable.rowHeight = UITableView.automaticDimension
         resultsTable.backgroundColor = .clear
+        resultsTable.tableFooterView = UIView()
         // Do any additional setup after loading the view.
     }
     
@@ -60,7 +61,5 @@ extension ReviewsView: UITableViewDelegate {
         }
     }
     
-    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        return nil
-    }
+    
 }

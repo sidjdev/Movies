@@ -18,6 +18,17 @@
 	<string>1.0</string>
 	<key>CFBundleVersion</key>
 	<string>1</string>
+	<key>UIAppFonts</key>
+	<array>
+		<string>SourceCodePro-Black</string>
+		<string>SourceCodePro-BlackItalic</string>
+		<string>SourceCodePro-Bold</string>
+		<string>SourceCodePro-BoldItalic</string>
+		<string>SourceCodePro-ExtraLightItalic.ttf</string>
+		<string>SourceCodePro-ExtraLight</string>
+		<string>SourceCodePro-SemiBold.ttf</string>
+		<string>SourceCodePro-Medium.ttf</string>
+	</array>
 	<key>movieDB</key>
 	<dict>
 		<key>auth_key</key>

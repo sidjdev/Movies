@@ -16,7 +16,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="nH6-YB-FRw">
-                                <rect key="frame" x="8" y="88" width="398" height="808"/>
+                                <rect key="frame" x="0.0" y="88" width="414" height="808"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <connections>
                                     <outlet property="dataSource" destination="BYZ-38-t0r" id="yP1-JW-scR"/>
@@ -24,11 +24,11 @@
                                 </connections>
                             </tableView>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemTealColor" red="0.35294117650000001" green="0.7843137255" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" red="0.0" green="0.58823529411764708" blue="0.53333333333333333" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="nH6-YB-FRw" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="8" id="gza-4h-KKP"/>
+                            <constraint firstItem="nH6-YB-FRw" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="gza-4h-KKP"/>
                             <constraint firstItem="nH6-YB-FRw" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="uQ1-93-3nI"/>
-                            <constraint firstItem="nH6-YB-FRw" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" constant="-8" id="vGI-yT-IPK"/>
+                            <constraint firstItem="nH6-YB-FRw" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="vGI-yT-IPK"/>
                             <constraint firstAttribute="bottom" secondItem="nH6-YB-FRw" secondAttribute="bottom" id="zjI-LQ-ACj"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
@@ -58,7 +58,7 @@
                                 </constraints>
                             </imageView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="lp2-wb-dvk">
-                                <rect key="frame" x="0.0" y="282.5" width="414" height="613.5"/>
+                                <rect key="frame" x="0.0" y="274.5" width="414" height="621.5"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <sections/>
                                 <connections>
@@ -67,9 +67,9 @@
                                 </connections>
                             </tableView>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <color key="backgroundColor" red="0.0" green="0.58823529409999997" blue="0.53333333329999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="lp2-wb-dvk" firstAttribute="top" secondItem="933-W8-O29" secondAttribute="bottom" constant="8" id="3WF-0Q-c5M"/>
+                            <constraint firstItem="lp2-wb-dvk" firstAttribute="top" secondItem="933-W8-O29" secondAttribute="bottom" id="3WF-0Q-c5M"/>
                             <constraint firstItem="933-W8-O29" firstAttribute="top" secondItem="8AJ-S7-7WO" secondAttribute="top" id="C5g-UK-pMF"/>
                             <constraint firstItem="933-W8-O29" firstAttribute="leading" secondItem="8AJ-S7-7WO" secondAttribute="leading" id="I0d-1P-dfD"/>
                             <constraint firstAttribute="bottom" secondItem="lp2-wb-dvk" secondAttribute="bottom" id="RoQ-PF-ZxA"/>
@@ -107,7 +107,7 @@
                                 </connections>
                             </tableView>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <color key="backgroundColor" red="0.0" green="0.58823529409999997" blue="0.53333333329999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="qhm-tb-BSw" secondAttribute="bottom" id="Dmb-Gq-EJo"/>
                             <constraint firstItem="qhm-tb-BSw" firstAttribute="trailing" secondItem="jgD-3i-4Pe" secondAttribute="trailing" id="OSZ-xN-zBM"/>

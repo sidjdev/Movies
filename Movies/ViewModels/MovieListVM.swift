@@ -36,28 +36,28 @@ class MovieListVM {
     func numberOfSections(in tableView: MovieListTables) -> Int {
         switch tableView {
         case .nowShowing:
-            return displayArray?.count ?? 0
+            return 1
         }
     }
     
     func numberOfRows(in tableView: MovieListTables, In section: Int) -> Int {
         switch tableView {
         case .nowShowing:
-            return 1
+            return displayArray?.count ?? 0
         }
     }
     
     func heightForRow(in tableView: MovieListTables, at indexPath: IndexPath) -> CGFloat {
         switch tableView {
         case .nowShowing:
-            return 125.0
+            return 185.0
         }
     }
     
     func cellData(for tableView: MovieListTables, at indexPath: IndexPath) -> Any? {
         switch tableView {
         case .nowShowing:
-            if let resultData = displayArray?[indexPath.section] {
+            if let resultData = displayArray?[indexPath.row] {
                 return resultData
             }
         }

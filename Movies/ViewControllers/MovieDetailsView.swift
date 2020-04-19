@@ -43,6 +43,7 @@ class MovieDetailsView: UIViewController {
         detailsTable.register(reviewsNib, forCellReuseIdentifier: "reviewIndicatorCell")
         detailsTable.register(crewsNib, forCellReuseIdentifier: "crewListCell")
         
+        self.navigationController?.navigationBar.tintColor = UIColor(hex: "e0f2f1")
         // Do any additional setup after loading the view.
     }
     override func viewWillAppear(_ animated: Bool) {

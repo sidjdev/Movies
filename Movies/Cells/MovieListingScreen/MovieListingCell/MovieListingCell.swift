@@ -36,7 +36,12 @@ class MovieListingCell: UITableViewCell {
         case large
         case original
     }
-    let posterSizes: [imageSizeReference : String] = [.small : "w92", .medium : "w342", .large : "w500", .original : "original"]
+    let backdrop_sizes:[imageSizeReference : String] = [
+        .small : "w300",
+        .medium : "w780",
+        .large : "w1280",
+        .original : "original"
+    ]
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -54,11 +59,9 @@ class MovieListingCell: UITableViewCell {
             releaseDate.text = cellData!.release_date
             imageView?.clipsToBounds = true
             imageView?.layer.masksToBounds = true
-            guard let imageURL = getImageUrl(for: cellData!, at: .small) else { return }
+            guard let imageURL = getImageUrl(for: cellData!, at: .medium) else { return }
             moviePoster.sd_setImage(with: imageURL, completed: nil)
-            DispatchQueue.main.async {
-                self.moviePoster.layer.cornerRadius = 10.0
-            }
+            
             
             
         }
@@ -67,7 +70,7 @@ class MovieListingCell: UITableViewCell {
     
     private func getImageUrl(for cellData: MovieModel, at size: imageSizeReference) -> URL? {
         var imageUrl = Constants.URL.imageBaseUrl
-        imageUrl = imageUrl+posterSizes[size]!+(cellData.poster_path ?? "")
+        imageUrl = imageUrl+backdrop_sizes[size]!+(cellData.backdrop_path ?? "")
         if let url = URL(string: imageUrl) {
             return url
         }
