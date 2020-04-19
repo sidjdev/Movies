@@ -46,7 +46,10 @@ class MovieListView: UIViewController {
         setupSearchController()
         // Do any additional setup after loading the view.
     }
-    
+    override func viewWillAppear(_ animated: Bool) {
+        self.navigationController!.navigationBar.largeTitleTextAttributes = [.font: UIFont.systemFont(ofSize: 30, weight: .bold)]
+        self.navigationController!.navigationBar.titleTextAttributes = [.font: UIFont.systemFont(ofSize: 18, weight: .bold)]
+    }
     func getNowShowingList(page: Int = 1) {
         movieListVM.fetchNowShowingList(for: page) { (message, status) in
             if status {

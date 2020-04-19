@@ -9,7 +9,7 @@
 import UIKit
 import SDWebImage
 
-class CrewCell: UICollectionViewCell {
+class HorizontalListCell: UICollectionViewCell {
 
     @IBOutlet weak var cellImage: UIImageView!
     
@@ -60,8 +60,13 @@ class CrewCell: UICollectionViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        cellImage.image = nil
+        
         // Initialization code
+    }
+    
+    override func prepareForReuse() {
+        cellImage.image = UIImage(systemName: "person.circle")
+        super.prepareForReuse()
     }
     
     private func setDisplay() {

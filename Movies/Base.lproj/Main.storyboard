@@ -79,7 +79,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="8AJ-S7-7WO"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Movie Name" id="bGb-ib-g9L"/>
+                    <navigationItem key="navigationItem" title="Movie Name" largeTitleDisplayMode="never" id="bGb-ib-g9L"/>
                     <connections>
                         <outlet property="backDropImage" destination="933-W8-O29" id="xLE-Fy-XIS"/>
                         <outlet property="detailsTable" destination="lp2-wb-dvk" id="8Xc-US-yWl"/>

@@ -30,8 +30,8 @@ class CrewListCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        let crewCellNib = UINib(nibName: "CrewCell", bundle: nil)
-        crewCollectionView.register(crewCellNib, forCellWithReuseIdentifier: "crewCell")
+        let crewCellNib = UINib(nibName: "HorizontalListCell", bundle: nil)
+        crewCollectionView.register(crewCellNib, forCellWithReuseIdentifier: "horizontalListCell")
         // Initialization code
     }
 
@@ -74,7 +74,7 @@ extension CrewListCell: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let crewCell = collectionView.dequeueReusableCell(withReuseIdentifier: "crewCell", for: indexPath) as? CrewCell else { return UICollectionViewCell() }
+        guard let crewCell = collectionView.dequeueReusableCell(withReuseIdentifier: "horizontalListCell", for: indexPath) as? HorizontalListCell else { return UICollectionViewCell() }
         switch displayContent {
             case .crew:
                 crewCell.crewData = Movies.details.crewList?.cast[indexPath.item]
@@ -89,7 +89,7 @@ extension CrewListCell: UICollectionViewDataSource {
 
 extension CrewListCell: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        guard let cell = collectionView.cellForItem(at: indexPath) as? CrewCell else {return}
+        guard let cell = collectionView.cellForItem(at: indexPath) as? HorizontalListCell else {return}
         if self.displayContent == .similarMovies && delegate != nil {
             delegate!.selectedSimilar(movie: cell.movieData)
         }
