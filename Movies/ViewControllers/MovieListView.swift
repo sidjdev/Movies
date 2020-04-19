@@ -16,6 +16,15 @@ class MovieListView: UIViewController {
     var page = 1
     var searchActive = false
     var searchingText = ""
+    fileprivate func setupSearchController() {
+        let searchController = UISearchController()
+        navigationItem.hidesSearchBarWhenScrolling = true
+        navigationItem.searchController = searchController
+        searchController.searchBar.delegate = self
+        searchController.delegate = self
+        searchController.searchBar.clipsToBounds = true
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         getNowShowingList()
@@ -24,14 +33,7 @@ class MovieListView: UIViewController {
         let movieListingCellNib = UINib(nibName: "MovieListingCell", bundle: nil)
         moviesTableView.register(movieListingCellNib, forCellReuseIdentifier: "movieListingCell")
         moviesTableView.separatorStyle = .none
-        let searchController = UISearchController() // Search Controller
-        navigationItem.hidesSearchBarWhenScrolling = false
-        navigationItem.searchController = searchController
-        searchController.searchBar.delegate = self
-        searchController.delegate = self
-//        searchController.d
-        searchController.searchBar.clipsToBounds = true
-        self.view.bringSubviewToFront(moviesTableView)
+        setupSearchController()
         // Do any additional setup after loading the view.
     }
     

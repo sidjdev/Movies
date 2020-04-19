@@ -168,8 +168,7 @@
 			children = (
 				B12BDDFC244B633F00705E74 /* MovieDetailsScreen */,
 				B12BDDF6244B592500705E74 /* MovieListingScreen */,
-				B163DE94244C070400FAB54D /* ReviewCell.swift */,
-				B163DE95244C070400FAB54D /* ReviewCell.xib */,
+				B163DE9B244C318800FAB54D /* ReviewScreen */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -257,6 +256,23 @@
 				B12BDE10244B7A2500705E74 /* CrewCell.xib */,
 			);
 			path = CrewCell;
+			sourceTree = "<group>";
+		};
+		B163DE9A244C317D00FAB54D /* ReviewCell */ = {
+			isa = PBXGroup;
+			children = (
+				B163DE94244C070400FAB54D /* ReviewCell.swift */,
+				B163DE95244C070400FAB54D /* ReviewCell.xib */,
+			);
+			path = ReviewCell;
+			sourceTree = "<group>";
+		};
+		B163DE9B244C318800FAB54D /* ReviewScreen */ = {
+			isa = PBXGroup;
+			children = (
+				B163DE9A244C317D00FAB54D /* ReviewCell */,
+			);
+			path = ReviewScreen;
 			sourceTree = "<group>";
 		};
 		B196A489244A165F00D3D2E0 = {
