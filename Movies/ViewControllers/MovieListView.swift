@@ -70,7 +70,6 @@ extension MovieListView: UITableViewDataSource {
             page += 1
             getNowShowingList(page: page)
         }
-        
         return movieCell
     }
 }

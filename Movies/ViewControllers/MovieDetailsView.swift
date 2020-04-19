@@ -51,11 +51,8 @@ class MovieDetailsView: UIViewController {
         setBackDropImage()
         setMovieDetails()
     }
-    override func viewDidAppear(_ animated: Bool) {
-        
-    }
     
-    override func viewWillDisappear(_ animated: Bool) {
+    override func viewDidDisappear(_ animated: Bool) {
         if self.isMovingFromParent {
             movieDetailsVM = nil
         }
