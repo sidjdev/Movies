@@ -10,21 +10,57 @@ import UIKit
 
 class ReviewsView: UIViewController {
 
+    @IBOutlet weak var resultsTable: UITableView!
+    let reviewsVM = MovieReviewsVM()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        let reviewCellNib = UINib(nibName: "ReviewCell", bundle: nil)
+        resultsTable.register(reviewCellNib, forCellReuseIdentifier: "reviewCell")
+        resultsTable.rowHeight = UITableView.automaticDimension
+        resultsTable.backgroundColor = .clear
         // Do any additional setup after loading the view.
     }
     
+}
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+extension ReviewsView: UITableViewDataSource {
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return reviewsVM.numberOfSections()
     }
-    */
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return reviewsVM.numberOfRows(in: section)
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let reviewCell = tableView.dequeueReusableCell(withIdentifier: "reviewCell") as? ReviewCell else { return UITableViewCell() }
+        guard let reviewData = reviewsVM.cellData(at: indexPath) as? Review else { return UITableViewCell() }
+        reviewCell.row = indexPath.row
+        reviewCell.expansionRow = reviewsVM.expansionRow
+        reviewCell.review = reviewData
+        return reviewCell
+    }
+}
 
+extension ReviewsView: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        reviewsVM.heightForRow(at: indexPath)
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: false)
+        if reviewsVM.expansionRow == indexPath.row {
+            reviewsVM.expansionRow = -1
+        } else {
+            reviewsVM.expansionRow = indexPath.row
+        }
+        DispatchQueue.main.async {
+            self.resultsTable.reloadRows(at: [indexPath], with: .fade)
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        return nil
+    }
 }
