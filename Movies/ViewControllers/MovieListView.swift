@@ -14,6 +14,8 @@ class MovieListView: UIViewController {
     let movieListVM = MovieListVM()
     var selectedMovie: MovieModel? = nil
     var page = 1
+    var searchActive = false
+    var searchingText = ""
     override func viewDidLoad() {
         super.viewDidLoad()
         getNowShowingList()
@@ -22,6 +24,14 @@ class MovieListView: UIViewController {
         let movieListingCellNib = UINib(nibName: "MovieListingCell", bundle: nil)
         moviesTableView.register(movieListingCellNib, forCellReuseIdentifier: "movieListingCell")
         moviesTableView.separatorStyle = .none
+        let searchController = UISearchController() // Search Controller
+        navigationItem.hidesSearchBarWhenScrolling = false
+        navigationItem.searchController = searchController
+        searchController.searchBar.delegate = self
+        searchController.delegate = self
+//        searchController.d
+        searchController.searchBar.clipsToBounds = true
+        self.view.bringSubviewToFront(moviesTableView)
         // Do any additional setup after loading the view.
     }
     
@@ -54,7 +64,7 @@ extension MovieListView: UITableViewDataSource {
         movieCell.contentView.layer.cornerRadius = 10.0
         movieCell.bookButton.layer.cornerRadius = 10.0
         movieCell.cellData = cellData
-        if indexPath.section == tableView.numberOfSections - 1 {
+        if indexPath.section == tableView.numberOfSections - 1 && !searchActive {
             page += 1
             getNowShowingList(page: page)
         }
@@ -85,3 +95,32 @@ extension MovieListView: UITableViewDelegate {
     }
 }
 
+
+extension MovieListView: UISearchBarDelegate {
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        searchActive = searchText == "" ? false : true
+        searchingText = searchText
+        movieListVM.search(title: searchText) {
+            DispatchQueue.main.async {
+                self.moviesTableView.reloadData()
+            }
+        }
+    }
+   
+    func searchBarShouldEndEditing(_ searchBar: UISearchBar) -> Bool {
+        if searchBar.text != "" {
+            return false
+        }
+        return true
+    }
+}
+
+extension MovieListView: UISearchControllerDelegate {
+    func willDismissSearchController(_ searchController: UISearchController) {
+        navigationItem.searchController?.searchBar.text = searchingText
+    }
+    
+    func didDismissSearchController(_ searchController: UISearchController) {
+        navigationItem.searchController?.searchBar.text = searchingText
+    }
+}

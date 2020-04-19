@@ -21,8 +21,11 @@ class MovieListVM {
     enum PresentingControllers {
         case details
     }
+    
+    var displayArray: [MovieModel]? = nil
     func fetchNowShowingList(for page: Int = 1, CompletionHandler: @escaping (String, Bool) -> ()) {
         api.callAPI(APItype: .getMovieList, pageCount: page) { (message, status) in
+            self.displayArray = Movies.movieList.nowShowing?.results
             CompletionHandler(message, status)
             return
         }
@@ -33,7 +36,7 @@ class MovieListVM {
     func numberOfSections(in tableView: MovieListTables) -> Int {
         switch tableView {
         case .nowShowing:
-            return Movies.movieList.nowShowing?.results.count ?? 0
+            return displayArray?.count ?? 0
         }
     }
     
@@ -54,7 +57,7 @@ class MovieListVM {
     func cellData(for tableView: MovieListTables, at indexPath: IndexPath) -> Any? {
         switch tableView {
         case .nowShowing:
-            if let resultData = Movies.movieList.nowShowing?.results[indexPath.section] {
+            if let resultData = displayArray?[indexPath.section] {
                 return resultData
             }
         }
@@ -64,9 +67,71 @@ class MovieListVM {
     func present(controller: PresentingControllers, with object: Any, from sourceObject: Any) {
         switch controller {
         case .details:
-            guard var detailObject = object as? MovieDetailsVM else { return }
+            guard let detailObject = object as? MovieDetailsVM else { return }
             guard let listObject = sourceObject as? MovieModel else { return }
             detailObject.selectedMovie = listObject
         }
     }
+    
+    func search(title: String, Completion: @escaping () -> ()) {
+        if Movies.movieList.nowShowing != nil {
+            displayArray = []
+            if title == "" {
+                displayArray = Movies.movieList.nowShowing?.results
+            }
+            for each in Movies.movieList.nowShowing!.results {
+                if isString(title, in: each.title) {
+                    Logger.print("title-\(title)")
+                    displayArray?.append(each)
+                }
+            }
+        }
+        Completion()
+        return
+        
+    }
+    
+    func isString(_ string: String, in Phrase: String) -> Bool {
+        let phraseArray = Phrase.components(separatedBy: " ").map {$0.lowercased()}
+        let originalArray = string.components(separatedBy: " ").map {$0.lowercased()}
+        let sortedPhrase = phraseArray.sorted(by: <)
+        let sortedOriginal = originalArray.sorted(by: <)
+        if string.count == 1 {
+            for each in sortedPhrase {
+                if each.first!.lowercased() == string.first!.lowercased() {
+                    return true
+                }
+            }
+        }
+        let intersection = findIntersection(firstArray: sortedPhrase, secondArray: sortedOriginal)
+        if intersection == sortedOriginal {
+            return true
+        }
+        if sortedOriginal.count == 1 {
+            for each in sortedPhrase {
+                let replacement = replace(string: each, with: sortedOriginal[0])
+                if replacement == each {
+                    return true
+                }
+            }
+        }
+        
+        return false
+    }
+
+    private func findIntersection (firstArray : [String], secondArray : [String]) -> [String] {
+        return [String](Set<String>(firstArray).intersection(secondArray))
+    }
+    
+    
+    func replace(string: String, with smallString: String) -> String? {
+        var original = string
+        if smallString.count <= string.count {
+            original = original.replace_fromStart(endIndex: smallString.distance(from: smallString.startIndex, to: smallString.endIndex), With: smallString)
+            return original
+        }
+        return nil
+    }
+
+    
 }
