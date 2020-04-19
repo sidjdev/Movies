@@ -74,7 +74,7 @@ class MovieListVM {
     }
     
     func search(title: String, Completion: @escaping () -> ()) {
-        if Movies.movieList.nowShowing != nil {
+        if Movies.movieList.nowShowing != nil && title.last != " " {
             displayArray = []
             if title == "" {
                 displayArray = Movies.movieList.nowShowing?.results
@@ -84,6 +84,7 @@ class MovieListVM {
                     displayArray?.append(each)
                 }
             }
+            
         }
         Completion()
         return

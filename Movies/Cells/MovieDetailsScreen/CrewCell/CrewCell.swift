@@ -60,6 +60,7 @@ class CrewCell: UICollectionViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        cellImage.image = nil
         // Initialization code
     }
     
