@@ -41,6 +41,9 @@ class MovieListingCell: UITableViewCell {
         .large : "w1280",
         .original : "original"
     ]
+    
+    var bookDelegate: BookProtocol? = nil
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         bookButton.addShadow(color: .black, offset: CGSize(width: 0, height: 4))
@@ -69,6 +72,12 @@ class MovieListingCell: UITableViewCell {
         }
     }
     
+    @IBAction func bookAct(_ sender: Any) {
+        if cellData != nil {
+            bookDelegate?.clickedBook(for: cellData!)
+        }
+        
+    }
     
     private func getImageUrl(for cellData: MovieModel, at size: imageSizeReference) -> URL? {
         var imageUrl = Constants.URL.imageBaseUrl

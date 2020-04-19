@@ -8,6 +8,10 @@
 
 import UIKit
 
+
+protocol BookProtocol {
+    func clickedBook(for Movie: MovieModel)
+}
 class MovieListView: UIViewController {
 
     @IBOutlet weak var moviesTableView: UITableView!
@@ -72,6 +76,7 @@ extension MovieListView: UITableViewDataSource {
 //        movieCell.contentView.layer.cornerRadius = 10.0
         movieCell.bookButton.layer.cornerRadius = 10.0
         movieCell.cellData = cellData
+        movieCell.bookDelegate = self
         if indexPath.section == tableView.numberOfSections - 1 && !searchActive {
             page += 1
             getNowShowingList(page: page)
@@ -130,5 +135,22 @@ extension MovieListView: UISearchControllerDelegate {
     
     func didDismissSearchController(_ searchController: UISearchController) {
         navigationItem.searchController?.searchBar.text = searchingText
+    }
+}
+
+extension MovieListView: BookProtocol {
+    func clickedBook(for Movie: MovieModel) {
+        let title = "\(Movie.title)"
+        let body = "We have booked your tickets for \(Movie.title)"
+        
+        let alertController = UIAlertController(title: title, message: body, preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "OK", style: .default) { (action) in
+            
+        }
+        
+        alertController.addAction(okAction)
+        
+        present(alertController, animated: true, completion: nil)
+        
     }
 }
