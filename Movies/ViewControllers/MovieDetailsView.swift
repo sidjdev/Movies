@@ -165,6 +165,9 @@ extension MovieDetailsView: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        if indexPath.row == 1 {
+            performSegue(withIdentifier: Constants.segue.details_reviews, sender: self)
+        }
     }
 }
 

@@ -18,6 +18,7 @@ class Constants {
     
     struct segue {
         static let home_details = "toMovieDetails"
+        static let details_reviews = "toReviews"
     }
     
 }

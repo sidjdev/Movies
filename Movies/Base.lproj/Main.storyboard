@@ -83,11 +83,28 @@
                     <connections>
                         <outlet property="backDropImage" destination="933-W8-O29" id="xLE-Fy-XIS"/>
                         <outlet property="detailsTable" destination="lp2-wb-dvk" id="8Xc-US-yWl"/>
+                        <segue destination="99G-MN-EfS" kind="show" identifier="toReviews" id="pdh-e3-CAq"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rA4-Uf-6zX" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1992.753623188406" y="120.53571428571428"/>
+        </scene>
+        <!--Reviews-->
+        <scene sceneID="A1P-xq-tGz">
+            <objects>
+                <viewController id="99G-MN-EfS" customClass="ReviewsView" customModule="Movies" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="oIG-Rc-4mO">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="jgD-3i-4Pe"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Reviews" id="p3L-cT-WUS"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="YH7-nO-vMf" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2914" y="123"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="mDC-hj-Vxe">
