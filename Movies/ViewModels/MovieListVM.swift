@@ -81,7 +81,6 @@ class MovieListVM {
             }
             for each in Movies.movieList.nowShowing!.results {
                 if isString(title, in: each.title) {
-                    Logger.print("title-\(title)")
                     displayArray?.append(each)
                 }
             }
@@ -92,6 +91,8 @@ class MovieListVM {
     }
     
     func isString(_ string: String, in Phrase: String) -> Bool {
+        let lowerPhrase = Phrase.lowercased()
+        let lowerString = string.lowercased()
         let phraseArray = Phrase.components(separatedBy: " ").map {$0.lowercased()}
         let originalArray = string.components(separatedBy: " ").map {$0.lowercased()}
         let sortedPhrase = phraseArray.sorted(by: <)
@@ -114,6 +115,25 @@ class MovieListVM {
                     return true
                 }
             }
+        } else {
+            for eachString in sortedOriginal {
+                var match = false
+                for eachPhrase in sortedPhrase {
+                    if eachPhrase.range(of: eachString) != nil {
+                        match = true
+                    }
+                }
+                if !match {
+                    return false
+                }
+            }
+            return true
+//            if (lowerPhrase).range(of: lowerString) != nil {
+//                return true
+//            } else {
+//                Logger.print("Unmatch-\(lowerPhrase) with \(lowerString)")
+//            }
+//            return false
         }
         
         return false
