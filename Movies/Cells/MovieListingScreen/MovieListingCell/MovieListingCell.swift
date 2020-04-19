@@ -8,7 +8,6 @@
 
 import UIKit
 import SDWebImage
-import Nuke
 
 class MovieListingCell: UITableViewCell {
 
