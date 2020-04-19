@@ -17,7 +17,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="justified" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sA2-xI-Gq8">
-                        <rect key="frame" x="16" y="11" width="280" height="70"/>
+                        <rect key="frame" x="8" y="11" width="304" height="81"/>
                         <fontDescription key="fontDescription" name="Kefa-Regular" family="Kefa" pointSize="15"/>
                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
@@ -25,10 +25,10 @@
                 </subviews>
                 <color key="backgroundColor" red="0.0" green="0.58823529409999997" blue="0.53333333329999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                 <constraints>
-                    <constraint firstAttribute="trailing" secondItem="sA2-xI-Gq8" secondAttribute="trailing" constant="24" id="AO6-u3-hse"/>
-                    <constraint firstItem="sA2-xI-Gq8" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="NJV-ac-irj"/>
+                    <constraint firstAttribute="trailing" secondItem="sA2-xI-Gq8" secondAttribute="trailing" constant="8" id="AO6-u3-hse"/>
+                    <constraint firstItem="sA2-xI-Gq8" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="NJV-ac-irj"/>
                     <constraint firstItem="sA2-xI-Gq8" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="11" id="n7c-zI-f3c"/>
-                    <constraint firstAttribute="bottom" secondItem="sA2-xI-Gq8" secondAttribute="bottom" constant="19" id="nx5-GY-Qtg"/>
+                    <constraint firstAttribute="bottom" secondItem="sA2-xI-Gq8" secondAttribute="bottom" constant="8" id="nx5-GY-Qtg"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>

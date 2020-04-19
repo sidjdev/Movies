@@ -76,9 +76,9 @@ class MovieDetailsVM {
                 return Movies.movieReviews.reviews?.total_results == 0 ? 0 : 55.0
                 
             case 2:
-                return 175.0
+                return 200.0
             case 3:
-                return 175.0
+                return 200.0
             default:
                 return 55.0
             }

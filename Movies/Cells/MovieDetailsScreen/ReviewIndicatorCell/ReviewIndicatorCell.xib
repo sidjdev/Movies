@@ -17,7 +17,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Reviews" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nbJ-4f-XLI">
-                        <rect key="frame" x="16" y="13" width="60" height="18.5"/>
+                        <rect key="frame" x="8" y="13" width="60" height="18.5"/>
                         <fontDescription key="fontDescription" name="Kefa-Regular" family="Kefa" pointSize="16"/>
                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
@@ -26,7 +26,7 @@
                 <color key="backgroundColor" red="0.0" green="0.58823529409999997" blue="0.53333333329999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                 <constraints>
                     <constraint firstItem="nbJ-4f-XLI" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="kma-4P-70A"/>
-                    <constraint firstItem="nbJ-4f-XLI" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="u56-aY-bn2"/>
+                    <constraint firstItem="nbJ-4f-XLI" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="u56-aY-bn2"/>
                 </constraints>
             </tableViewCellContentView>
             <color key="backgroundColor" red="0.0" green="0.58823529409999997" blue="0.53333333329999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

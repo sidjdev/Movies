@@ -29,6 +29,8 @@
 		<string>SourceCodePro-SemiBold.ttf</string>
 		<string>SourceCodePro-Medium.ttf</string>
 	</array>
+    <key>UIUserInterfaceStyle</key>
+    <string>Dark</string>
 	<key>movieDB</key>
 	<dict>
 		<key>auth_key</key>

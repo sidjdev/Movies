@@ -96,7 +96,11 @@ class MovieDetailsView: UIViewController {
     }
     func setBackDropImage() {
         let backdropUrl = getImageUrl(imageSize: .medium, imageName: movieDetailsVM?.selectedMovie?.backdrop_path ?? "")
-        backDropImage.sd_setImage(with: backdropUrl, completed: nil)
+        if movieDetailsVM?.selectedMovie?.backdrop_path == nil {
+            backDropImage.image = UIImage(named: "film")
+        } else {
+            backDropImage.sd_setImage(with: backdropUrl, completed: nil)
+        }
     }
     
     func getImageUrl(imageSize: imageSizeReference, imageName: String) -> URL? {

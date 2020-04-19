@@ -43,6 +43,7 @@ class MovieListingCell: UITableViewCell {
     ]
     override func awakeFromNib() {
         super.awakeFromNib()
+        bookButton.addShadow(color: .black, offset: CGSize(width: 0, height: 4))
         // Initialization code
     }
 
@@ -54,15 +55,17 @@ class MovieListingCell: UITableViewCell {
     
     func setContents() {
         if cellData != nil {
-            movieName.text = cellData!.original_title
+            movieName.text = cellData!.title
             releaseDate.text = cellData!.release_date
             imageView?.clipsToBounds = true
             imageView?.layer.masksToBounds = true
+            
             guard let imageURL = getImageUrl(for: cellData!, at: .medium) else { return }
-            moviePoster.sd_setImage(with: imageURL, completed: nil)
-            
-            
-            
+            if cellData?.backdrop_path != nil {
+                moviePoster.sd_setImage(with: imageURL, completed: nil)
+            } else {
+                moviePoster.image = UIImage(named: "film")
+            }
         }
     }
     

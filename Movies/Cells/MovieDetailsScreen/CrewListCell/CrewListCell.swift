@@ -10,6 +10,8 @@ import UIKit
 
 class CrewListCell: UITableViewCell {
     @IBOutlet weak var crewCollectionView: UICollectionView!
+    
+    @IBOutlet weak var cellInfo: UILabel!
     enum DisplayContents {
         case crew
         case similarMovies
@@ -25,6 +27,7 @@ class CrewListCell: UITableViewCell {
         }
     }
     var delegate: SimilarMovieProtocol? = nil
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         let crewCellNib = UINib(nibName: "CrewCell", bundle: nil)
@@ -39,6 +42,15 @@ class CrewListCell: UITableViewCell {
     }
     
     func setCollectionView() {
+        if displayContent == .crew {
+            cellInfo.text = "Crew"
+        } else {
+            if Movies.details.similarMovies?.results.count == 0 {
+                cellInfo.text = ""
+            } else {
+                cellInfo.text = "Similar Movies"
+            }
+        }
         DispatchQueue.main.async {
             self.crewCollectionView.reloadData()
         }

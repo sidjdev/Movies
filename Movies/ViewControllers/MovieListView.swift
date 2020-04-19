@@ -22,9 +22,13 @@ class MovieListView: UIViewController {
         navigationItem.searchController = searchController
         UITextField.appearance(whenContainedInInstancesOf: [UISearchBar.self]).attributedPlaceholder = NSAttributedString(string: "Search", attributes: [NSAttributedString.Key.foregroundColor: UIColor.white])
         searchController.searchBar.tintColor = .white
+        searchController.searchBar.setPlaceholderTextColorTo(color: .white)
         searchController.searchBar.delegate = self
         searchController.delegate = self
         searchController.searchBar.clipsToBounds = true
+        
+        //for testing
+        moviesTableView.accessibilityIdentifier = "movieTable"
     }
     
     override func viewDidLoad() {
@@ -72,6 +76,7 @@ extension MovieListView: UITableViewDataSource {
             page += 1
             getNowShowingList(page: page)
         }
+        movieCell.accessibilityIdentifier = "cell-\(indexPath.row)"
         return movieCell
     }
 }

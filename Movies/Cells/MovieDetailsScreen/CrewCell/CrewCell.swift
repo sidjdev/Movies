@@ -65,16 +65,27 @@ class CrewCell: UICollectionViewCell {
     
     private func setDisplay() {
         crewName.text = crewData!.name
+        cellImage.image = nil
         guard let imageUrl = getImageUrl(imageSize: .medium, imageName: crewData!.profile_path ?? "") else { return }
-        cellImage.sd_setImage(with: imageUrl, completed: nil)
-        cellImage.makeCircular()
+        if crewData!.profile_path != nil {
+            cellImage.sd_setImage(with: imageUrl, completed: nil)
+            cellImage.makeCircular()
+        } else {
+            cellImage.image = UIImage(systemName: "person.circle")
+        }
+        
     }
 
     private func setSimilarMovie() {
         crewName.text = movieData!.title
         guard let imageUrl = getPosterImageUrl(imageSize: .medium, imageName: movieData!.poster_path ?? "") else { return }
-        cellImage.sd_setImage(with: imageUrl, completed: nil)
-        cellImage.makeCircular()
+        if movieData!.poster_path != nil {
+            cellImage.sd_setImage(with: imageUrl, completed: nil)
+            cellImage.makeCircular()
+        } else {
+            cellImage.image = UIImage(systemName: "video.circle")
+        }
+        
     }
     func getImageUrl(imageSize: imageSizeReference, imageName: String) -> URL? {
         var imageUrlString = Constants.URL.imageBaseUrl
