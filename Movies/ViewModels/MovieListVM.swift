@@ -91,8 +91,6 @@ class MovieListVM {
     }
     
     func isString(_ string: String, in Phrase: String) -> Bool {
-        let lowerPhrase = Phrase.lowercased()
-        let lowerString = string.lowercased()
         let phraseArray = Phrase.components(separatedBy: " ").map {$0.lowercased()}
         let originalArray = string.components(separatedBy: " ").map {$0.lowercased()}
         let sortedPhrase = phraseArray.sorted(by: <)

@@ -20,6 +20,8 @@ class MovieListView: UIViewController {
         let searchController = UISearchController()
         navigationItem.hidesSearchBarWhenScrolling = true
         navigationItem.searchController = searchController
+        UITextField.appearance(whenContainedInInstancesOf: [UISearchBar.self]).attributedPlaceholder = NSAttributedString(string: "Search", attributes: [NSAttributedString.Key.foregroundColor: UIColor.white])
+        searchController.searchBar.tintColor = .white
         searchController.searchBar.delegate = self
         searchController.delegate = self
         searchController.searchBar.clipsToBounds = true
