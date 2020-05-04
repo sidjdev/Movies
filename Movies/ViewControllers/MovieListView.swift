@@ -80,7 +80,7 @@ extension MovieListView: UITableViewDataSource {
         movieCell.bookButton.layer.cornerRadius = 10.0
         movieCell.cellData = cellData
         movieCell.bookDelegate = self
-        if indexPath.section == tableView.numberOfSections - 1 && !searchActive {
+        if indexPath.row == tableView.numberOfRows(inSection: 0) - 1 && !searchActive {
             page += 1
             getNowShowingList(page: page)
         }

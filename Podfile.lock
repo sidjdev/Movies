@@ -1,14 +1,13 @@
 PODS:
-  - Alamofire (4.9.1)
-  - AlamofireImage (3.6.0):
-    - Alamofire (~> 4.9)
+  - Alamofire (5.1.0)
+  - AlamofireImage (4.1.0):
+    - Alamofire (~> 5.1)
   - MarqueeLabel (4.0.2)
   - SDWebImage (5.7.0):
     - SDWebImage/Core (= 5.7.0)
   - SDWebImage/Core (5.7.0)
 
 DEPENDENCIES:
-  - Alamofire (~> 4.9)
   - AlamofireImage
   - MarqueeLabel
   - SDWebImage
@@ -21,11 +20,11 @@ SPEC REPOS:
     - SDWebImage
 
 SPEC CHECKSUMS:
-  Alamofire: 85e8a02c69d6020a0d734f6054870d7ecb75cf18
-  AlamofireImage: be9963c6582d68b39e89191f64c82a7d7bf40fdd
+  Alamofire: 9d5c5f602928e512395b30950c5984eca840093c
+  AlamofireImage: c4a2ba349885fb3064feb74d2e547bd42ce9be10
   MarqueeLabel: f762aa681ae201f66c1d511858b171f75d83013a
   SDWebImage: a99471f452bdfa0ca52ddf5b1adf2b61cab1d1eb
 
-PODFILE CHECKSUM: 552b0b8647f3769db9b01124c7fa567152a19b18
+PODFILE CHECKSUM: 009821b14c00c8b86d98beb3b504a6d9e5cb6d77
 
 COCOAPODS: 1.8.4

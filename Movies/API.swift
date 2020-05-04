@@ -57,8 +57,8 @@ class API {
     
     
 
-    private func alamofireCall(url: String, params: Parameters?, headers: HTTPHeaders, APIMethod: HTTPMethod, urlEncoding: Bool, CompletionHandler: @escaping ((DataResponse<Any>), Bool) -> ()) {
-        Alamofire.request(url, method: APIMethod, parameters: params, headers: headers).responseJSON
+    private func alamofireCall(url: String, params: Parameters?, headers: HTTPHeaders, APIMethod: HTTPMethod, urlEncoding: Bool, CompletionHandler: @escaping ((AFDataResponse<Any>), Bool) -> ()) {
+        AF.request(url, method: APIMethod, parameters: params, headers: headers).responseJSON
         { response in
             
             CompletionHandler(response, response.response?.statusCode == 200 ? true : false)
@@ -98,7 +98,7 @@ class API {
             case .success:
                 switch APItype {
                 case .getMovieList:
-                    if let json = response.result.value as? [String : AnyObject] {
+                    if let json = response.value as? [String : AnyObject] {
                         guard let data = self.jsonToData(json: json) else { return }
                         guard let nowShowing = try? JSONDecoder().decode(NowShowingModel.self, from: data) else { return }
                         
@@ -115,7 +115,7 @@ class API {
                     return
                     
                 case .synopsis:
-                    if let json = response.result.value as? [String : AnyObject] {
+                    if let json = response.value as? [String : AnyObject] {
                         guard let data = self.jsonToData(json: json) else { return }
                         let details = try! JSONDecoder().decode(DetailsModel.self, from: data)
                         Movies.details.movieDetails = details
@@ -127,7 +127,7 @@ class API {
                     return
                     
                 case .getReviews:
-                    if let json = response.result.value as? [String : AnyObject] {
+                    if let json = response.value as? [String : AnyObject] {
                         guard let data = self.jsonToData(json: json) else { return }
                         let reviewResponse = try! JSONDecoder().decode(ReviewResponseModel.self, from: data)
                         Movies.movieReviews.reviews = reviewResponse
@@ -138,7 +138,7 @@ class API {
                     return
                     
                 case .getCrew:
-                    if let json = response.result.value as? [String : AnyObject] {
+                    if let json = response.value as? [String : AnyObject] {
                         guard let data = self.jsonToData(json: json) else { return }
                         let crewResponse = try! JSONDecoder().decode(CrewModel.self, from: data)
                         Movies.details.crewList = crewResponse
@@ -149,7 +149,7 @@ class API {
                     return
                     
                 case .getSimilar:
-                    if let json = response.result.value as? [String : AnyObject] {
+                    if let json = response.value as? [String : AnyObject] {
                         guard let data = self.jsonToData(json: json) else { return }
                         let similar = try! JSONDecoder().decode(SimilarMoviesModel.self, from: data)
 //                            else { return }
@@ -175,7 +175,7 @@ class API {
     
     func getImage(imageName: String, of size: String, CompletionHandler: @escaping (UIImage?) -> ()) {
         guard let imageURL = URL(string: Constants.URL.imageBaseUrl+size+imageName) else { return }
-        Alamofire.request(imageURL).responseImage { response in
+        AF.request(imageURL).responseImage { response in
             
             if case .success(let image) = response.result {
                 
