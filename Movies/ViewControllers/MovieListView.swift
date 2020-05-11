@@ -74,9 +74,6 @@ extension MovieListView: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cellData = movieListVM.cellData(for: .nowShowing, at: indexPath) as? MovieModel else {return UITableViewCell()}
         guard let movieCell = tableView.dequeueReusableCell(withIdentifier: "movieListingCell") as? MovieListingCell else { return UITableViewCell() }
-//        movieCell.contentView.layer.borderColor = UIColor.lightGray.cgColor
-//        movieCell.contentView.layer.borderWidth = 0.5
-//        movieCell.contentView.layer.cornerRadius = 10.0
         movieCell.bookButton.layer.cornerRadius = 10.0
         movieCell.cellData = cellData
         movieCell.bookDelegate = self
