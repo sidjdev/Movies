@@ -37,6 +37,10 @@ struct NowShowingModel: Codable {
 
 
 struct SimilarMoviesModel: Codable {
+    internal init(results: [MovieModel]) {
+        self.results = results
+    }
+    
     var results: [MovieModel]
     init(data: [MovieModel]) {
         self.results = data
